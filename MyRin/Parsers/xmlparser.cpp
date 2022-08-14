@@ -16,7 +16,7 @@ QVector<Person>* XmlParser::parseFile(const QString &fileName)
     QXmlStreamReader xmlReader;
     xmlReader.addData(fileOutOut.readAll());
 
-    Person tempPerson("", "", "", "", "", "");
+    Person tempPerson("", "", "", "", "", "", "");
     while(!xmlReader.atEnd())
     {
      if(xmlReader.isStartElement())
@@ -24,7 +24,7 @@ QVector<Person>* XmlParser::parseFile(const QString &fileName)
          QString elemName = xmlReader.name().toString();
          if (elemName == "Persons"){}
          else if (elemName == "Person")
-             tempPerson = Person("", "", "", "", "", "");
+             tempPerson = Person("", "", "", "", "", "", "");
          else if (elemName == "FirstName")
              tempPerson.setFirstName(xmlReader.readElementText());
          else if (elemName == "Surname")
@@ -35,9 +35,11 @@ QVector<Person>* XmlParser::parseFile(const QString &fileName)
              tempPerson.setEmail(xmlReader.readElementText());
          else if (elemName == "Telephone")
              tempPerson.setTelephone(xmlReader.readElementText());
-         else if (elemName == "SelfId")
+         else if (elemName == "Telegram")
+             tempPerson.setTelegram(xmlReader.readElementText());
+         else if (elemName == "Description")
          {
-             tempPerson.setSelfId(xmlReader.readElementText());
+             tempPerson.setTelegram(xmlReader.readElementText());
              resultVector->push_back(tempPerson);
          }
          else
@@ -79,16 +81,21 @@ void XmlParser::parseTable(const QVector<Person> persons, const QString &fileNam
         QDomText telephoneText = doc.createTextNode(person.getTelephone());
         telephone.appendChild(telephoneText);
 
-        QDomElement selfId = doc.createElement("SelfId");
-        QDomText selfIdText = doc.createTextNode(person.getSelfId());
-        selfId.appendChild(selfIdText);
+        QDomElement telegram = doc.createElement("Telegram");
+        QDomText telegramText = doc.createTextNode(person.getTelegram());
+        telegram.appendChild(telegramText);
+
+        QDomElement description = doc.createElement("Description");
+        QDomText descriptionText = doc.createTextNode(person.getDescription());
+        description.appendChild(telegramText);
 
         personEl.appendChild(name);
         personEl.appendChild(sname);
         personEl.appendChild(pname);
         personEl.appendChild(email);
         personEl.appendChild(telephone);
-        personEl.appendChild(selfId);
+        personEl.appendChild(telegram);
+        personEl.appendChild(description);
         root.appendChild(personEl);
     }
     doc.appendChild(root);

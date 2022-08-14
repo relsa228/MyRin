@@ -12,10 +12,12 @@ private:
 
     QString Email;
     QString Telephone;
-    QString SelfId;
+    QString Telegram;
+
+    QString Description;
 
 public:
-    Person(QString firstName, QString surname, QString patronymic, QString email, QString telephone, QString selfId);
+    Person(QString firstName, QString surname, QString patronymic, QString email, QString telephone, QString telegram, QString description);
 
     const QString &getFirstName() const;
     void setFirstName(const QString &newFirstName);
@@ -32,8 +34,11 @@ public:
     const QString &getTelephone() const;
     void setTelephone(const QString &newTelephone);
 
-    const QString &getSelfId() const;
-    void setSelfId(const QString &newSelfId);
+    const QString &getTelegram() const;
+    void setTelegram(const QString &newSelfId);
+
+    const QString &getDescription() const;
+    void setDescription(const QString &newDescription);
 };
 
 #endif // PERSON_H

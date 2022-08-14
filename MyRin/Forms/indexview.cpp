@@ -11,12 +11,13 @@ IndexView::IndexView(QWidget *parent) :
     filtersOn = false;
     saveBeforeVector = new QVector<Person>;
 
-    ui->PersonTable->setColumnCount(6);
+    ui->PersonTable->setColumnCount(7);
 
     for (int i = 0; i < 6; i++)
-        ui->PersonTable->setColumnWidth(i, 100);
+        ui->PersonTable->setColumnWidth(i, 105);
+    ui->PersonTable->setColumnWidth(6, 165);
 
-    ui->PersonTable->setHorizontalHeaderLabels(QStringList()<< "Имя" << "Фамилия" << "Отчество" << "Почта" << "Телефон" << "Личный номер");
+    ui->PersonTable->setHorizontalHeaderLabels(QStringList()<< "Имя" << "Фамилия" << "Отчество" << "Почта" << "Телефон" << "Telegram" << "Дополнительные сведения");
 }
 
 IndexView::~IndexView()
@@ -72,9 +73,13 @@ void IndexView::FillPersonsTable(const QVector<Person> *persons)
         ui->PersonTable->setItem(row, 4, telephone);
         ui->PersonTable->item(row, 4)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
 
-        QTableWidgetItem *selfId = new QTableWidgetItem(tr("%1").arg(persons->at(row).getSelfId()));
-        ui->PersonTable->setItem(row, 5, selfId);
+        QTableWidgetItem *telegram = new QTableWidgetItem(tr("%1").arg(persons->at(row).getTelegram()));
+        ui->PersonTable->setItem(row, 5, telegram);
         ui->PersonTable->item(row, 5)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
+
+        QTableWidgetItem *description = new QTableWidgetItem(tr("%1").arg(persons->at(row).getDescription()));
+        ui->PersonTable->setItem(row, 6, description);
+        ui->PersonTable->item(row, 6)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
     }
 }
 
@@ -83,13 +88,14 @@ QVector<Person>* IndexView::GetDataFromTable()
     QVector<Person>* resultVector = new QVector<Person>();
     for(int row = 0; row < ui->PersonTable->rowCount(); row++)
     {
-        Person tempPerson("", "", "", "", "", "");
+        Person tempPerson("", "", "", "", "", "", "");
         tempPerson.setFirstName(ui->PersonTable->item(row, 0)->text());
         tempPerson.setSurname(ui->PersonTable->item(row, 1)->text());
         tempPerson.setPatronymic(ui->PersonTable->item(row, 2)->text());
         tempPerson.setEmail(ui->PersonTable->item(row, 3)->text());
         tempPerson.setTelephone(ui->PersonTable->item(row, 4)->text());
-        tempPerson.setSelfId(ui->PersonTable->item(row, 5)->text());
+        tempPerson.setTelegram(ui->PersonTable->item(row, 5)->text());
+        tempPerson.setDescription(ui->PersonTable->item(row, 6)->text());
 
         resultVector->push_back(tempPerson);
     }
@@ -114,10 +120,10 @@ void IndexView::on_FindButton_clicked()
     QString patronymicFilter = ui->PatronymicInput->text();
     QString emailFilter = ui->EmailInput->text();
     QString telephoneFilter = ui->TelephoneInput->text();
-    QString selfIdFilter = ui->SelfIdInput->text();
+    QString TelegramFilter = ui->TelegramInput->text();
 
     QVector<Person>* resultVector = filter->filterContent(*filterVector, firstNameFilter, surnameFilter, patronymicFilter,
-                                                         emailFilter, telephoneFilter, selfIdFilter);
+                                                         emailFilter, telephoneFilter, TelegramFilter);
 
     FillPersonsTable(resultVector);
 
@@ -136,7 +142,7 @@ void IndexView::on_CleanButton_clicked()
     ui->PatronymicInput->setText("");
     ui->EmailInput->setText("");
     ui->TelephoneInput->setText("");
-    ui->SelfIdInput->setText("");
+    ui->TelegramInput->setText("@");
 }
 
 
@@ -146,7 +152,7 @@ void IndexView::on_UploadXmlButton_clicked()
                             this,
                             tr("Загрузить файл"),
                             "",
-                            tr("XML (*.xml);;TXT (*.txt)")
+                            tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)")
                             );
     if(!xmlFilePath.isEmpty())
     {
@@ -168,7 +174,7 @@ void IndexView::on_DownloadXmlButton_clicked()
                         this,
                         tr("Сохранить файл"),
                         "",
-                        tr("XML (*.xml);;TXT (*.txt)")
+                        tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)")
                         );
     xmlParser->parseTable(*GetDataFromTable(), xmlSavePath);
 }

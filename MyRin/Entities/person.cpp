@@ -50,22 +50,33 @@ void Person::setTelephone(const QString &newTelephone)
     Telephone = newTelephone;
 }
 
-const QString &Person::getSelfId() const
+const QString &Person::getTelegram() const
 {
-    return SelfId;
+    return Telegram;
 }
 
-void Person::setSelfId(const QString &newSelfId)
+void Person::setTelegram(const QString &newSelfId)
 {
-    SelfId = newSelfId;
+    Telegram = newSelfId;
 }
 
-Person::Person(QString firstName, QString surname, QString patronymic, QString email, QString telephone, QString selfId)
+const QString &Person::getDescription() const
+{
+    return Description;
+}
+
+void Person::setDescription(const QString &newDescription)
+{
+    Description = newDescription;
+}
+
+Person::Person(QString firstName, QString surname, QString patronymic, QString email, QString telephone, QString telegram, QString description)
 {
     FirstName = firstName;
     Surname = surname;
     Patronymic = patronymic;
     Email = email;
     Telephone = telephone;
-    SelfId = selfId;
+    Telegram = telegram;
+    Description = description;
 }

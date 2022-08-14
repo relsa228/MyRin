@@ -7,13 +7,13 @@ Filter::Filter()
 
 QVector<Person>* Filter::filterContent(QVector<Person> persons,
                                       const QString firstName, const QString surname, const QString patronymic,
-                                      const QString email, const QString telephone, const QString selfId)
+                                      const QString email, const QString telephone, const QString telegram)
 {
     QVector<Person>* resultVector = new QVector<Person>;
 
     foreach (Person person, persons)
         if(filterFirstName(person, firstName) && filterSurname(person, surname) && filterPatronymic(person, patronymic)
-                && filterEmail(person, email) && filterTelephone(person, telephone) && filterSelfId(person, selfId))
+                && filterEmail(person, email) && filterTelephone(person, telephone) && filterTelegram(person, telegram))
             resultVector->push_back(person);
 
     return resultVector;
@@ -59,9 +59,9 @@ bool Filter::filterTelephone(const Person person, const QString telephone)
     return false;
 }
 
-bool Filter::filterSelfId(const Person person, const QString selfId)
+bool Filter::filterTelegram(const Person person, const QString telegram)
 {
-    if(selfId.isEmpty() || person.getSelfId() == selfId)
+    if(telegram.isEmpty() || person.getTelegram() == telegram)
         return true;
 
     return false;
