@@ -70,13 +70,36 @@ void Person::setDescription(const QString &newDescription)
     Description = newDescription;
 }
 
-Person::Person(QString firstName, QString surname, QString patronymic, QString email, QString telephone, QString telegram, QString description)
+const QString &Person::getInternalTelephone() const
+{
+    return InternalTelephone;
+}
+
+void Person::setInternalTelephone(const QString &newInternalTelephone)
+{
+    InternalTelephone = newInternalTelephone;
+}
+
+const QString &Person::getCityTelephone() const
+{
+    return CityTelephone;
+}
+
+void Person::setCityTelephone(const QString &newCityTelephone)
+{
+    CityTelephone = newCityTelephone;
+}
+
+Person::Person(QString firstName, QString surname, QString patronymic, QString email,
+               QString telephone, QString internalTelephone, QString cityTelephone, QString telegram, QString description)
 {
     FirstName = firstName;
     Surname = surname;
     Patronymic = patronymic;
     Email = email;
     Telephone = telephone;
+    InternalTelephone = internalTelephone;
+    CityTelephone = cityTelephone;
     Telegram = telegram;
     Description = description;
 }

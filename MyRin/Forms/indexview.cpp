@@ -8,16 +8,19 @@ IndexView::IndexView(QWidget *parent) :
     ui->setupUi(this);
     xmlParser = new XmlParser();
     filter = new Filter();
+    tableServise = new TableService(ui->PersonTable);
     filtersOn = false;
     saveBeforeVector = new QVector<Person>;
 
-    ui->PersonTable->setColumnCount(7);
+    ui->PersonTable->setColumnCount(9);
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 9; i++)
         ui->PersonTable->setColumnWidth(i, 105);
-    ui->PersonTable->setColumnWidth(6, 165);
+    ui->PersonTable->setColumnWidth(8, 165);
 
-    ui->PersonTable->setHorizontalHeaderLabels(QStringList()<< "Имя" << "Фамилия" << "Отчество" << "Почта" << "Телефон" << "Telegram" << "Дополнительные сведения");
+    ui->PersonTable->setHorizontalHeaderLabels(QStringList()<< "Имя" << "Фамилия" << "Отчество" << "Почта"
+                                               << "Телефон" << "Внтр. телефон" << "Гор. телефон" << "Telegram"
+                                               << "Дополнительные сведения");
 }
 
 IndexView::~IndexView()
@@ -25,95 +28,17 @@ IndexView::~IndexView()
     delete ui;
 }
 
-void IndexView::ErrorMsg(QString errorMsg)
-{
-    QMessageBox msg = QMessageBox();
-    msg.setWindowIcon(QIcon(":/icon/mainIcon/Icons/calendar3.svg"));
-    msg.setWindowTitle("Ошибка");
-    msg.setIcon(msg.Critical);
-    msg.setText(errorMsg);
-    msg.addButton("Принято", msg.AcceptRole);
-    msg.exec();
-}
-
-void IndexView::InfoMsg(QString infoMsg)
-{
-    QMessageBox msg = QMessageBox();
-    msg.setWindowIcon(QIcon(":/icon/mainIcon/Icons/calendar3.svg"));
-    msg.setWindowTitle("Выполнено");
-    msg.setIcon(msg.Information);
-    msg.setText(infoMsg);
-    msg.addButton("Принято", msg.AcceptRole);
-    msg.exec();
-}
-
-void IndexView::FillPersonsTable(const QVector<Person> *persons)
-{
-    ui->PersonTable->setRowCount(persons->count());
-
-    for(int row = 0; row < persons->count(); row++)
-    {
-        QTableWidgetItem *firstName = new QTableWidgetItem(tr("%1").arg(persons->at(row).getFirstName()));
-        ui->PersonTable->setItem(row, 0, firstName);
-        ui->PersonTable->item(row, 0)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        QTableWidgetItem *surname = new QTableWidgetItem(tr("%1").arg(persons->at(row).getSurname()));
-        ui->PersonTable->setItem(row, 1, surname);
-        ui->PersonTable->item(row, 1)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        QTableWidgetItem *patronymic = new QTableWidgetItem(tr("%1").arg(persons->at(row).getPatronymic()));
-        ui->PersonTable->setItem(row, 2, patronymic);
-        ui->PersonTable->item(row, 2)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        QTableWidgetItem *email = new QTableWidgetItem(tr("%1").arg(persons->at(row).getEmail()));
-        ui->PersonTable->setItem(row, 3, email);
-        ui->PersonTable->item(row, 3)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        QTableWidgetItem *telephone = new QTableWidgetItem(tr("%1").arg(persons->at(row).getTelephone()));
-        ui->PersonTable->setItem(row, 4, telephone);
-        ui->PersonTable->item(row, 4)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        QTableWidgetItem *telegram = new QTableWidgetItem(tr("%1").arg(persons->at(row).getTelegram()));
-        ui->PersonTable->setItem(row, 5, telegram);
-        ui->PersonTable->item(row, 5)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-
-        QTableWidgetItem *description = new QTableWidgetItem(tr("%1").arg(persons->at(row).getDescription()));
-        ui->PersonTable->setItem(row, 6, description);
-        ui->PersonTable->item(row, 6)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-    }
-}
-
-QVector<Person>* IndexView::GetDataFromTable()
-{
-    QVector<Person>* resultVector = new QVector<Person>();
-    for(int row = 0; row < ui->PersonTable->rowCount(); row++)
-    {
-        Person tempPerson("", "", "", "", "", "", "");
-        tempPerson.setFirstName(ui->PersonTable->item(row, 0)->text());
-        tempPerson.setSurname(ui->PersonTable->item(row, 1)->text());
-        tempPerson.setPatronymic(ui->PersonTable->item(row, 2)->text());
-        tempPerson.setEmail(ui->PersonTable->item(row, 3)->text());
-        tempPerson.setTelephone(ui->PersonTable->item(row, 4)->text());
-        tempPerson.setTelegram(ui->PersonTable->item(row, 5)->text());
-        tempPerson.setDescription(ui->PersonTable->item(row, 6)->text());
-
-        resultVector->push_back(tempPerson);
-    }
-
-    return resultVector;
-}
-
 void IndexView::on_FindButton_clicked()
 {
     if (filtersOn)
-        FillPersonsTable(saveBeforeVector);
+        tableServise->AddVectorOfPersonsToTable(saveBeforeVector);
     else
     {
         filtersOn = true;
-        saveBeforeVector = GetDataFromTable();
+        saveBeforeVector = tableServise->GetAllPersons();
     }
 
-    QVector<Person>* filterVector = GetDataFromTable();
+    QVector<Person>* filterVector = tableServise->GetAllPersons();
 
     QString firstNameFilter = ui->FirstNameInput->text();
     QString surnameFilter = ui->SurnameInput->text();
@@ -125,18 +50,18 @@ void IndexView::on_FindButton_clicked()
     QVector<Person>* resultVector = filter->filterContent(*filterVector, firstNameFilter, surnameFilter, patronymicFilter,
                                                          emailFilter, telephoneFilter, TelegramFilter);
 
-    FillPersonsTable(resultVector);
+    tableServise->AddVectorOfPersonsToTable(resultVector);
 
     if(resultVector->count() == 0)
-        ErrorMsg("По вашему запросу не найдено результатов.");
+        ErrorMessage("По вашему запросу не найдено результатов.");
     else
-        InfoMsg("Результатов по вашему запросу: " + QString::number(resultVector->count()));
+        InfoMessage("Результатов по вашему запросу: " + QString::number(resultVector->count()));
 }
 
 void IndexView::on_CleanButton_clicked()
 {
     if(!saveBeforeVector->isEmpty())
-        FillPersonsTable(saveBeforeVector);
+        tableServise->AddVectorOfPersonsToTable(saveBeforeVector);
     ui->FirstNameInput->setText("");
     ui->SurnameInput->setText("");
     ui->PatronymicInput->setText("");
@@ -158,11 +83,12 @@ void IndexView::on_UploadXmlButton_clicked()
     {
         QVector<Person>* uploadPersons = xmlParser->parseFile(xmlFilePath);
         if(uploadPersons->count() == 0)
-            ErrorMsg("Файл пустой или имеет некорректный формат.");
+            ErrorMessage("Файл пустой или имеет некорректный формат.");
         else
         {
-            FillPersonsTable(uploadPersons);
-            saveBeforeVector = GetDataFromTable();
+            tableServise->AddVectorOfPersonsToTable(uploadPersons);
+            saveBeforeVector = tableServise->GetAllPersons();
+            InfoMessage("Файл успешно обработан. Получено записей: " + QString::number(uploadPersons->count()));
         }
     }
 }
@@ -176,5 +102,5 @@ void IndexView::on_DownloadXmlButton_clicked()
                         "",
                         tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)")
                         );
-    xmlParser->parseTable(*GetDataFromTable(), xmlSavePath);
+    xmlParser->parseTable(*tableServise->GetAllPersons(), xmlSavePath);
 }

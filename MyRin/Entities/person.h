@@ -10,14 +10,18 @@ private:
     QString Surname;
     QString Patronymic;
 
-    QString Email;
     QString Telephone;
+    QString InternalTelephone;
+    QString CityTelephone;
+
+    QString Email;
     QString Telegram;
 
     QString Description;
 
 public:
-    Person(QString firstName, QString surname, QString patronymic, QString email, QString telephone, QString telegram, QString description);
+    Person(QString firstName, QString surname, QString patronymic, QString email,
+           QString telephone, QString internalTelephone, QString cityTelephone, QString telegram, QString description);
 
     const QString &getFirstName() const;
     void setFirstName(const QString &newFirstName);
@@ -39,6 +43,12 @@ public:
 
     const QString &getDescription() const;
     void setDescription(const QString &newDescription);
+
+    const QString &getInternalTelephone() const;
+    void setInternalTelephone(const QString &newInternalTelephone);
+
+    const QString &getCityTelephone() const;
+    void setCityTelephone(const QString &newCityTelephone);
 };
 
 #endif // PERSON_H

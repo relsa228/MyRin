@@ -7,8 +7,14 @@
 #include <QVector>
 
 #include "Parsers/xmlparser.h"
+
 #include "Entities/person.h"
+
 #include "Tools/filter.h"
+
+#include "Services/MessagesService/errormessage.h"
+#include "Services/MessagesService/infomessage.h"
+#include "Services/tableservice.h"
 
 namespace Ui {
 class IndexView;
@@ -21,8 +27,6 @@ class IndexView : public QMainWindow
 public:
     explicit IndexView(QWidget *parent = nullptr);
     ~IndexView();
-    void FillPersonsTable(const QVector<Person>* persons);
-    QVector<Person>* GetDataFromTable();
 
 private slots:
     void on_CleanButton_clicked();
@@ -37,12 +41,10 @@ private:
     Ui::IndexView *ui;
     XmlParser* xmlParser;
     Filter* filter;
+    TableService* tableServise;
 
     bool filtersOn;
     QVector<Person>* saveBeforeVector;
-
-    void ErrorMsg(QString errorMsg);
-    void InfoMsg(QString infoMsg);
 };
 
 #endif // INDEXVIEW_H

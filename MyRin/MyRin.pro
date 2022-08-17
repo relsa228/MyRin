@@ -13,7 +13,14 @@ SOURCES += \
     Entities/person.cpp \
     Forms/addpersonview.cpp \
     Forms/indexview.cpp \
+    Parsers/jsonparser.cpp \
     Parsers/xmlparser.cpp \
+    Services/DataBaseService/databasegetservice.cpp \
+    Services/DataBaseService/databaseinitservice.cpp \
+    Services/DataBaseService/databasepushservice.cpp \
+    Services/MessagesService/errormessage.cpp \
+    Services/MessagesService/infomessage.cpp \
+    Services/tableservice.cpp \
     Tools/filter.cpp \
     main.cpp \
 
@@ -21,7 +28,14 @@ HEADERS += \
     Entities/person.h \
     Forms/addpersonview.h \
     Forms/indexview.h \
+    Parsers/jsonparser.h \
     Parsers/xmlparser.h \
+    Services/DataBaseService/databasegetservice.h \
+    Services/DataBaseService/databaseinitservice.h \
+    Services/DataBaseService/databasepushservice.h \
+    Services/MessagesService/errormessage.h \
+    Services/MessagesService/infomessage.h \
+    Services/tableservice.h \
     Tools/filter.h
 
 FORMS += \
