@@ -35,3 +35,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     Resources/MainIcons.qrc
+
+include(..\MyRin\QxOrm\QxOrm.pri)
+
+INCLUDEPATH += ..\MyRin\QxOrm\include\
+LIBS += ..\MyRin\QxOrm\lib
