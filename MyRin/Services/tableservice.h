@@ -4,7 +4,7 @@
 #include <QTableWidget>
 #include <QVector>
 
-#include "Entities/person.h"
+#include "Models/personmodel.h"
 
 class TableService
 {
@@ -14,11 +14,11 @@ private:
 public:
     TableService(QTableWidget *newTable);
 
-    void AddPersonToTable(Person person, int row);
-    void AddVectorOfPersonsToTable(QVector<Person>* vector);
+    void AddPersonToTable(PersonModel person, int row);
+    void AddVectorOfPersonsToTable(QVector<PersonModel>* vector);
 
-    Person GetPersonFromTable(int row);
-    QVector<Person>* GetAllPersons();
+    PersonModel GetPersonFromTable(int row);
+    QVector<PersonModel>* GetAllPersons();
 
     void setTable(QTableWidget *newTable);
 };

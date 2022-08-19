@@ -5,9 +5,9 @@ XmlParser::XmlParser()
 
 }
 
-QVector<Person>* XmlParser::parseFile(const QString &fileName)
+QVector<PersonModel>* XmlParser::parseFile(const QString &fileName)
 {
-    QVector<Person>* resultVector = new QVector<Person>;
+    QVector<PersonModel>* resultVector = new QVector<PersonModel>;
 
     QFile fileOutOut(fileName);
     if(!fileOutOut.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -16,7 +16,7 @@ QVector<Person>* XmlParser::parseFile(const QString &fileName)
     QXmlStreamReader xmlReader;
     xmlReader.addData(fileOutOut.readAll());
 
-    Person tempPerson("", "", "", "", "", "", "", "", "");
+    PersonModel tempPerson;
     while(!xmlReader.atEnd())
     {
      if(xmlReader.isStartElement())
@@ -24,26 +24,26 @@ QVector<Person>* XmlParser::parseFile(const QString &fileName)
          QString elemName = xmlReader.name().toString();
          if (elemName == "Persons"){}
          else if (elemName == "Person")
-             tempPerson = Person("", "", "", "", "", "", "", "", "");
+             tempPerson = PersonModel();
          else if (elemName == "FirstName")
-             tempPerson.setFirstName(xmlReader.readElementText());
+             tempPerson.FirstName = xmlReader.readElementText();
          else if (elemName == "Surname")
-             tempPerson.setSurname(xmlReader.readElementText());
+             tempPerson.Surname = xmlReader.readElementText();
          else if (elemName == "Patronymic")
-             tempPerson.setPatronymic(xmlReader.readElementText());
+             tempPerson.Patronymic = xmlReader.readElementText();
          else if (elemName == "Email")
-             tempPerson.setEmail(xmlReader.readElementText());
+             tempPerson.Email = xmlReader.readElementText();
          else if (elemName == "Telephone")
-             tempPerson.setTelephone(xmlReader.readElementText());
+             tempPerson.Telephone = xmlReader.readElementText();
          else if (elemName == "InternalTelephone")
-             tempPerson.setTelephone(xmlReader.readElementText());
+             tempPerson.InternalTelephone = xmlReader.readElementText();
          else if (elemName == "CityTelephone")
-             tempPerson.setTelephone(xmlReader.readElementText());
+             tempPerson.CityTelephone = xmlReader.readElementText();
          else if (elemName == "Telegram")
-             tempPerson.setTelegram(xmlReader.readElementText());
+             tempPerson.Telegram = xmlReader.readElementText();
          else if (elemName == "Description")
          {
-             tempPerson.setTelegram(xmlReader.readElementText());
+             tempPerson.Description = xmlReader.readElementText();
              resultVector->push_back(tempPerson);
          }
          else
@@ -56,49 +56,49 @@ QVector<Person>* XmlParser::parseFile(const QString &fileName)
     return resultVector;
 }
 
-void XmlParser::parseTable(const QVector<Person> persons, const QString &fileName)
+void XmlParser::parseTable(const QVector<PersonModel> persons, const QString &fileName)
 {
     QDomDocument doc;
     QDomElement root = doc.createElement("Persons");
 
-    foreach (Person person, persons)
+    foreach (PersonModel person, persons)
     {
         QDomElement personEl = doc.createElement("Person");
 
         QDomElement name = doc.createElement("FirstName");
-        QDomText nameText = doc.createTextNode(person.getFirstName());
+        QDomText nameText = doc.createTextNode(person.FirstName);
         name.appendChild(nameText);
 
         QDomElement sname = doc.createElement("Surname");
-        QDomText snameText = doc.createTextNode(person.getSurname());
+        QDomText snameText = doc.createTextNode(person.Surname);
         sname.appendChild(snameText);
 
         QDomElement pname = doc.createElement("Patronymic");
-        QDomText pnameText = doc.createTextNode(person.getPatronymic());
+        QDomText pnameText = doc.createTextNode(person.Patronymic);
         pname.appendChild(pnameText);
 
         QDomElement email = doc.createElement("Email");
-        QDomText emailText = doc.createTextNode(person.getEmail());
+        QDomText emailText = doc.createTextNode(person.Email);
         email.appendChild(emailText);
 
         QDomElement telephone = doc.createElement("Telephone");
-        QDomText telephoneText = doc.createTextNode(person.getTelephone());
+        QDomText telephoneText = doc.createTextNode(person.Telephone);
         telephone.appendChild(telephoneText);
 
         QDomElement internalTelephone = doc.createElement("InternalTelephone");
-        QDomText internalTelephoneText = doc.createTextNode(person.getInternalTelephone());
+        QDomText internalTelephoneText = doc.createTextNode(person.InternalTelephone);
         internalTelephone.appendChild(internalTelephoneText);
 
         QDomElement cityTelephone = doc.createElement("CityTelephone");
-        QDomText cityTelephoneText = doc.createTextNode(person.getCityTelephone());
+        QDomText cityTelephoneText = doc.createTextNode(person.CityTelephone);
         cityTelephone.appendChild(cityTelephoneText);
 
         QDomElement telegram = doc.createElement("Telegram");
-        QDomText telegramText = doc.createTextNode(person.getTelegram());
+        QDomText telegramText = doc.createTextNode(person.Telegram);
         telegram.appendChild(telegramText);
 
         QDomElement description = doc.createElement("Description");
-        QDomText descriptionText = doc.createTextNode(person.getDescription());
+        QDomText descriptionText = doc.createTextNode(person.Description);
         description.appendChild(telegramText);
 
         personEl.appendChild(name);

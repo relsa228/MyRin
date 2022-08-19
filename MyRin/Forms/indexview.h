@@ -8,13 +8,12 @@
 
 #include "Parsers/xmlparser.h"
 
-#include "Entities/person.h"
-
-#include "Tools/filter.h"
+#include "Models/personmodel.h"
 
 #include "Services/MessagesService/errormessage.h"
 #include "Services/MessagesService/infomessage.h"
 #include "Services/tableservice.h"
+#include "Services/DataBaseService/databaseinitservice.h"
 
 namespace Ui {
 class IndexView;
@@ -40,11 +39,11 @@ private slots:
 private:
     Ui::IndexView *ui;
     XmlParser* xmlParser;
-    Filter* filter;
     TableService* tableServise;
+    DataBaseInitService* dbInit;
 
     bool filtersOn;
-    QVector<Person>* saveBeforeVector;
+    QVector<PersonModel>* saveBeforeVector;
 };
 
 #endif // INDEXVIEW_H

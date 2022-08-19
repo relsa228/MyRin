@@ -7,15 +7,15 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-#include "Entities/person.h"
+#include "Models/personmodel.h"
 
 class XmlParser
 {
 public:
     XmlParser();
 
-    QVector<Person>* parseFile(const QString &fileName);
-    void parseTable(const QVector<Person>, const QString &fileName);
+    QVector<PersonModel>* parseFile(const QString &fileName);
+    void parseTable(const QVector<PersonModel>, const QString &fileName);
 };
 
 #endif // XMLPARSER_H
