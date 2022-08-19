@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QVector>
 
+#include "Forms/addpersonview.h"
+
 #include "Parsers/xmlparser.h"
 
 #include "Models/personmodel.h"
@@ -14,6 +16,7 @@
 #include "Services/MessagesService/infomessage.h"
 #include "Services/tableservice.h"
 #include "Services/DataBaseService/databaseinitservice.h"
+#include "Services/DataBaseService/databasepushservice.h"
 
 namespace Ui {
 class IndexView;
@@ -36,14 +39,18 @@ private slots:
 
     void on_FindButton_clicked();
 
+    void on_AddXmlButton_clicked();
+
+    void on_CleanTable_clicked();
+
+    void on_AddPerson_clicked();
+
 private:
     Ui::IndexView *ui;
     XmlParser* xmlParser;
-    TableService* tableServise;
-    DataBaseInitService* dbInit;
-
-    bool filtersOn;
-    QVector<PersonModel>* saveBeforeVector;
+    TableService* tableService;
+    DataBaseInitService* dbInitService;
+    DataBasePushService* dbPushService;
 };
 
 #endif // INDEXVIEW_H

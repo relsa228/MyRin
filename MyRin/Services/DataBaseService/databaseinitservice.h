@@ -1,7 +1,6 @@
 #ifndef DATABASEINITSERVICE_H
 #define DATABASEINITSERVICE_H
 
-#include <QtSql>
 #include <QxOrm.h>
 #include <QVector>
 
@@ -9,12 +8,9 @@
 
 class DataBaseInitService
 {
-private:
-    QSqlDatabase dataBase;
-
 public:
     DataBaseInitService();
-    const QSqlDatabase &getDataBase() const;
+    void cleanDataBase();
 
 private:
     void CreateShema();

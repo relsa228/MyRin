@@ -1,17 +1,29 @@
 #include "tableservice.h"
 
+TableService::TableService(QTableWidget *newTable)
+{
+    dataBaseGet = new DataBaseGetService();
+    setTable(newTable);
+}
+
 void TableService::setTable(QTableWidget *newTable)
 {
     table = newTable;
 }
 
-TableService::TableService(QTableWidget *newTable)
+void TableService::cleanTable()
 {
-    setTable(newTable);
+    table->clear();
+    table->setHorizontalHeaderLabels(QStringList()<< "Имя" << "Фамилия" << "Отчество" << "Почта"
+                                               << "Телефон" << "Внтр. телефон" << "Гор. телефон" << "Telegram"
+                                             << "Дополнительные сведения");
+    table->setRowCount(0);
 }
 
 void TableService::AddPersonToTable(PersonModel person, int row)
 {
+    table->setRowCount(row + 1);
+
     QTableWidgetItem *firstName = new QTableWidgetItem(QObject::tr("%1").arg(person.FirstName));
     table->setItem(row, 0, firstName);
     table->item(row, 0)->setFlags(Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsSelectable|Qt::ItemIsEnabled);
@@ -51,9 +63,19 @@ void TableService::AddPersonToTable(PersonModel person, int row)
 
 void TableService::AddVectorOfPersonsToTable(QVector<PersonModel> *persons)
 {
-    table->setRowCount(persons->count());
-    for(int row = 0; row < persons->count(); row++)
-        AddPersonToTable(persons->at(row), row);
+    foreach (PersonModel model, *persons)
+        AddPersonToTable(model, table->rowCount());
+}
+
+void TableService::AddFromDataBase()
+{
+    AddVectorOfPersonsToTable(dataBaseGet->getAll());
+}
+
+void TableService::UpdateFromDataBase()
+{
+    cleanTable();
+    AddVectorOfPersonsToTable(dataBaseGet->getAll());
 }
 
 PersonModel TableService::GetPersonFromTable(int row)

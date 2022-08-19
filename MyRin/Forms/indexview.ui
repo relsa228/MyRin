@@ -54,17 +54,18 @@
      <attribute name="label">
       <string>Редактирование</string>
      </attribute>
-     <widget class="QPushButton" name="UploadXmlButton">
+     <widget class="QPushButton" name="AddXmlButton">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>370</y>
-        <width>211</width>
-        <height>24</height>
+        <x>120</x>
+        <y>353</y>
+        <width>101</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>Загрузить из XML</string>
+       <string>Добавить из 
+XML</string>
       </property>
      </widget>
      <widget class="QPushButton" name="DownloadXmlButton">
@@ -114,7 +115,7 @@
      </widget>
      <widget class="QPushButton" name="AddPerson">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -158,6 +159,36 @@
       </property>
       <property name="text">
        <string>Изменить запись</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="UploadXmlButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>353</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Загрузить из 
+XML</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="CleanTable">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Очисть таблицу и базу данных</string>
       </property>
      </widget>
     </widget>
@@ -365,6 +396,14 @@
      </widget>
     </widget>
     <widget class="QWidget" name="overview">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>231</width>
+       <height>541</height>
+      </rect>
+     </property>
      <attribute name="label">
       <string>Обзор</string>
      </attribute>

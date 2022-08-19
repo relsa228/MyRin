@@ -1,9 +1,5 @@
 #include "databaseinitservice.h"
 
-const QSqlDatabase &DataBaseInitService::getDataBase() const
-{
-    return dataBase;
-}
 
 DataBaseInitService::DataBaseInitService()
 {
@@ -15,10 +11,15 @@ DataBaseInitService::DataBaseInitService()
     qx::QxSqlDatabase::getSingleton()->setFormatSqlQueryBeforeLogging(true);
     qx::QxSqlDatabase::getSingleton()->setDisplayTimerDetails(true);
 
-    QSqlError daoError = qx::dao::create_table<PersonModel>();
+    CreateShema();
+}
+
+void DataBaseInitService::cleanDataBase()
+{
+    qx::dao::delete_all<PersonModel>();
 }
 
 void DataBaseInitService::CreateShema()
 {
-
+    QSqlError daoError = qx::dao::create_table<PersonModel>();
 }
