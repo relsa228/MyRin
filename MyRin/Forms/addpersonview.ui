@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Добавить контакт</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../Resources/MainIcons.qrc">
+    <normaloff>:/icon/mainIcon/Icons/calendar3.svg</normaloff>:/icon/mainIcon/Icons/calendar3.svg</iconset>
   </property>
   <widget class="QLineEdit" name="telegramEdit">
    <property name="geometry">
@@ -292,6 +296,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Resources/MainIcons.qrc"/>
+ </resources>
  <connections/>
 </ui>

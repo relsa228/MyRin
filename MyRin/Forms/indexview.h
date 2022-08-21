@@ -45,6 +45,8 @@ private slots:
 
     void on_AddPerson_clicked();
 
+    void on_PersonTable_cellClicked(int row, int column);
+
 private:
     Ui::IndexView *ui;
     XmlParser* xmlParser;

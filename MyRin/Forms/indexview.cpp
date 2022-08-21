@@ -110,3 +110,21 @@ void IndexView::on_DownloadXmlButton_clicked()
 }
 #define END_XML_BUTTONS }
 
+
+void IndexView::on_PersonTable_cellClicked(int row, int column)
+{
+    PersonModel person = tableService->GetPersonFromTable(row);
+
+    ui->FirstNameView->setText(person.FirstName);
+    ui->SurnameView->setText(person.Surname);
+    ui->PatronymicView->setText(person.Patronymic);
+
+    ui->TelephoneView->setText(person.Telephone);
+    ui->InternalTelephoneView->setText(person.InternalTelephone);
+    ui->CityTelephoneView->setText(person.CityTelephone);
+
+    ui->EmailView->setText(person.Email);
+    ui->TelegramView->setText(person.Telegram);
+    ui->DescriptionView->setText(person.Description);
+}
+

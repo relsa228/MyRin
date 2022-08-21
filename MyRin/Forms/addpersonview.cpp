@@ -32,7 +32,7 @@ void AddPersonView::on_acceptButton_clicked()
     model.Description = ui->descrEdit->toPlainText();
 
     dataBasePush->pushSinglePerson(model);
-    tableService->AddPersonToTable(model, qx::dao::count<PersonModel>());
+    tableService->AddPersonToTable(model, qx::dao::count<PersonModel>() - 1);
 
     this->close();
 }
