@@ -27,6 +27,8 @@ public:
     PersonModel GetPersonFromTable(int row);
     QVector<PersonModel>* GetAllPersons();
 
+    void UpdatePerson(int row, PersonModel personModel);
+
     void setTable(QTableWidget *newTable);
     void cleanTable();
 };

@@ -16,7 +16,7 @@ DataBaseInitService::DataBaseInitService()
 
 void DataBaseInitService::cleanDataBase()
 {
-    qx::dao::delete_all<PersonModel>();
+    qx::dao::destroy_all<PersonModel>();
 }
 
 void DataBaseInitService::CreateShema()

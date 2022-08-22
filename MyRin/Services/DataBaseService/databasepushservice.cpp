@@ -34,3 +34,10 @@ QSqlError DataBasePushService::updateFromXmlFile(QString fileName)
     qx::dao::delete_all<PersonModel>();
     return addFromXmlFile(fileName);
 }
+
+QSqlError DataBasePushService::updatePersonInfo(PersonModel person)
+{
+    QSqlError daoError = qx::dao::update(person);
+
+    return daoError;
+}

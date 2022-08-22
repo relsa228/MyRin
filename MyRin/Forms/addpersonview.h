@@ -6,6 +6,8 @@
 #include "Models/personmodel.h"
 
 #include "Services/DataBaseService/databasepushservice.h"
+#include "Services/MessagesService/errormessage.h"
+#include "Services/MessagesService/infomessage.h"
 #include "Services/tableservice.h"
 
 namespace Ui {

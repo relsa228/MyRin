@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="redaction">
      <property name="geometry">
@@ -48,7 +48,7 @@
        <x>0</x>
        <y>0</y>
        <width>231</width>
-       <height>541</height>
+       <height>526</height>
       </rect>
      </property>
      <attribute name="label">
@@ -147,7 +147,7 @@ XML</string>
      </widget>
      <widget class="QPushButton" name="EditPerson">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
@@ -198,7 +198,7 @@ XML</string>
        <x>0</x>
        <y>0</y>
        <width>231</width>
-       <height>541</height>
+       <height>526</height>
       </rect>
      </property>
      <attribute name="label">
@@ -401,7 +401,7 @@ XML</string>
        <x>0</x>
        <y>0</y>
        <width>231</width>
-       <height>541</height>
+       <height>526</height>
       </rect>
      </property>
      <attribute name="label">
@@ -697,7 +697,7 @@ XML</string>
      <x>0</x>
      <y>0</y>
      <width>1102</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

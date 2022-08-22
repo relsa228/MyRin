@@ -35,6 +35,7 @@ CONFIG += c++17
 SOURCES += \
     Forms/addpersonview.cpp \
     Forms/indexview.cpp \
+    Forms/redactpersonview.cpp \
     Models/personmodel.cpp \
     Parsers/jsonparser.cpp \
     Parsers/xmlparser.cpp \
@@ -44,11 +45,12 @@ SOURCES += \
     Services/MessagesService/errormessage.cpp \
     Services/MessagesService/infomessage.cpp \
     Services/tableservice.cpp \
-    main.cpp \
+    main.cpp
 
 HEADERS += \
     Forms/addpersonview.h \
     Forms/indexview.h \
+    Forms/redactpersonview.h \
     Models/personmodel.h \
     Parsers/jsonparser.h \
     Parsers/xmlparser.h \
@@ -64,6 +66,7 @@ HEADERS += \
 FORMS += \
     Forms/addpersonview.ui \
     Forms/indexview.ui \
+    Forms/redactpersonview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

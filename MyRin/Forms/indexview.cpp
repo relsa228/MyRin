@@ -5,6 +5,7 @@ IndexView::IndexView(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::IndexView)
 {
+    currentViewRow = -1;
     ui->setupUi(this);
     xmlParser = new XmlParser();
 
@@ -111,9 +112,10 @@ void IndexView::on_DownloadXmlButton_clicked()
 #define END_XML_BUTTONS }
 
 
-void IndexView::on_PersonTable_cellClicked(int row, int column)
+void IndexView::on_PersonTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    PersonModel person = tableService->GetPersonFromTable(row);
+    currentViewRow = currentRow;
+    PersonModel person = tableService->GetPersonFromTable(currentRow);
 
     ui->FirstNameView->setText(person.FirstName);
     ui->SurnameView->setText(person.Surname);
@@ -126,5 +128,19 @@ void IndexView::on_PersonTable_cellClicked(int row, int column)
     ui->EmailView->setText(person.Email);
     ui->TelegramView->setText(person.Telegram);
     ui->DescriptionView->setText(person.Description);
+}
+
+
+void IndexView::on_EditPerson_clicked()
+{
+    if(currentViewRow == -1)
+        ErrorMessage("Необходимо выбрать элемент");
+    else
+    {
+        PersonModel model = tableService->GetPersonFromTable(currentViewRow);
+        RedactPersonView *redactPersonView = new RedactPersonView(currentViewRow, model, tableService);
+        redactPersonView->show();
+    }
+
 }
 

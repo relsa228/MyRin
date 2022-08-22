@@ -21,6 +21,8 @@ public:
 
     QSqlError addFromXmlFile(QString fileName);
     QSqlError updateFromXmlFile(QString fileName);
+
+    QSqlError updatePersonInfo(PersonModel person);
 };
 
 #endif // DATABASEPUSHSERVICE_H

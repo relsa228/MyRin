@@ -7,6 +7,7 @@
 #include <QVector>
 
 #include "Forms/addpersonview.h"
+#include "Forms/redactpersonview.h"
 
 #include "Parsers/xmlparser.h"
 
@@ -45,7 +46,9 @@ private slots:
 
     void on_AddPerson_clicked();
 
-    void on_PersonTable_cellClicked(int row, int column);
+    void on_PersonTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_EditPerson_clicked();
 
 private:
     Ui::IndexView *ui;
@@ -53,6 +56,8 @@ private:
     TableService* tableService;
     DataBaseInitService* dbInitService;
     DataBasePushService* dbPushService;
+
+    int currentViewRow;
 };
 
 #endif // INDEXVIEW_H

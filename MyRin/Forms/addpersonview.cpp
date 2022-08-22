@@ -31,8 +31,13 @@ void AddPersonView::on_acceptButton_clicked()
     model.Email = ui->emailEdit->text();
     model.Description = ui->descrEdit->toPlainText();
 
-    dataBasePush->pushSinglePerson(model);
-    tableService->AddPersonToTable(model, qx::dao::count<PersonModel>() - 1);
+    QSqlError error = dataBasePush->pushSinglePerson(model);
+    if(!error.isValid())
+    {
+        tableService->AddPersonToTable(model, qx::dao::count<PersonModel>() - 1);
+        InfoMessage("Запись успешно добавлена");
+    }
+    else ErrorMessage("Произошла ошибка");
 
     this->close();
 }
