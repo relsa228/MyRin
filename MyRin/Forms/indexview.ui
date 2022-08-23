@@ -131,12 +131,12 @@ XML</string>
      </widget>
      <widget class="QPushButton" name="DeletePerson">
       <property name="enabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>50</y>
+        <y>120</y>
         <width>211</width>
         <height>31</height>
        </rect>
@@ -152,7 +152,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>90</y>
+        <y>50</y>
         <width>211</width>
         <height>31</height>
        </rect>
@@ -182,7 +182,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>130</y>
+        <y>160</y>
         <width>211</width>
         <height>31</height>
        </rect>

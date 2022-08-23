@@ -12,7 +12,6 @@ public:
     DataBaseGetService();
 
     QVector<PersonModel>* getAll();
-    long getIdByRow(int row);
 };
 
 #endif // DATABASEGETSERVICE_H

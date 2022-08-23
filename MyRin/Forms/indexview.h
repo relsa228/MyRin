@@ -50,6 +50,8 @@ private slots:
 
     void on_EditPerson_clicked();
 
+    void on_DeletePerson_clicked();
+
 private:
     Ui::IndexView *ui;
     XmlParser* xmlParser;

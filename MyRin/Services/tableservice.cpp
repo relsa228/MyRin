@@ -4,6 +4,7 @@ TableService::TableService(QTableWidget *newTable)
 {
     dataBaseGet = new DataBaseGetService();
     setTable(newTable);
+    IndexColumn = new QVector<int>;
 }
 
 void TableService::setTable(QTableWidget *newTable)
@@ -23,6 +24,7 @@ void TableService::cleanTable()
 void TableService::AddPersonToTable(PersonModel person, int row)
 {
     table->setRowCount(row + 1);
+    IndexColumn->push_back(person.id);
 
     QTableWidgetItem *firstName = new QTableWidgetItem(QObject::tr("%1").arg(person.FirstName));
     table->setItem(row, 0, firstName);
@@ -67,14 +69,10 @@ void TableService::AddVectorOfPersonsToTable(QVector<PersonModel> *persons)
         AddPersonToTable(model, table->rowCount());
 }
 
-void TableService::AddFromDataBase()
-{
-    AddVectorOfPersonsToTable(dataBaseGet->getAll());
-}
-
 void TableService::UpdateFromDataBase()
 {
     cleanTable();
+    IndexColumn->clear();
     AddVectorOfPersonsToTable(dataBaseGet->getAll());
 }
 
@@ -101,6 +99,11 @@ QVector<PersonModel> *TableService::GetAllPersons()
         resultVector->push_back(GetPersonFromTable(row));
 
     return resultVector;
+}
+
+int TableService::GetIdByRow(int row)
+{
+    return IndexColumn->at(row);
 }
 
 void TableService::UpdatePerson(int row, PersonModel personModel)

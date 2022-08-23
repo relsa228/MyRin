@@ -8,6 +8,8 @@
 
 #include "Parsers/xmlparser.h"
 
+#include "Services/tableservice.h"
+
 class DataBasePushService
 {
 private:
@@ -16,13 +18,14 @@ private:
 public:
     DataBasePushService();
 
-    QSqlError pushVectorOfPersons(QVector<PersonModel> *persons);
-    QSqlError pushSinglePerson(PersonModel person);
+    QVector<int> pushVectorOfPersons(QVector<PersonModel> *persons, TableService *tableService);
+    int pushSinglePerson(PersonModel person, TableService *tableService);
 
-    QSqlError addFromXmlFile(QString fileName);
-    QSqlError updateFromXmlFile(QString fileName);
+    QSqlError addFromXmlFile(QString fileName, TableService *tableService);
+    QSqlError updateFromXmlFile(QString fileName, TableService *tableService);
 
-    QSqlError updatePersonInfo(PersonModel person);
+    QSqlError updatePersonInfo(PersonModel person, TableService *tableService, int row);
+    QSqlError deletePerson(TableService *tableService, int row);
 };
 
 #endif // DATABASEPUSHSERVICE_H

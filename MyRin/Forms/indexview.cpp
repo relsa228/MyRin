@@ -62,59 +62,28 @@ void IndexView::on_AddPerson_clicked()
     AddPersonView *addPersonView = new AddPersonView(tableService);
     addPersonView->show();
 }
-#define END_TOOL_BUTTONS }
 
-#define XML_BUTTONS {
-void IndexView::on_UploadXmlButton_clicked()
+void IndexView::on_PersonTable_currentCellChanged(int currentRow, int, int, int)
 {
-    QString xmlFilePath = QFileDialog::getOpenFileName(this, tr("Загрузить файл"), "",
-                                                       tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)"));
+     currentViewRow = currentRow;
 
-    if(!xmlFilePath.isEmpty())
+    if (currentViewRow == -1)
     {
-        if(dbPushService->updateFromXmlFile(xmlFilePath).isValid() || qx::dao::count<PersonModel>() == 0)
-            ErrorMessage("Файл пустой или имеет некорректный формат.");
-        else
-        {
-            tableService->UpdateFromDataBase();
-            InfoMessage("Файл успешно обработан. Получено записей: " + QString::number(qx::dao::count<PersonModel>()) +
-                        "\nТекущее кол-во записей: " + QString::number(qx::dao::count<PersonModel>()));
-        }
+        ui->FirstNameView->setText("");
+        ui->SurnameView->setText("");
+        ui->PatronymicView->setText("");
+
+        ui->TelephoneView->setText("");
+        ui->InternalTelephoneView->setText("");
+        ui->CityTelephoneView->setText("");
+
+        ui->TelegramView->setText("@");
+        ui->EmailView->setText("");
+        ui->DescriptionView->setText("");
+
+        return;
     }
-}
 
-void IndexView::on_AddXmlButton_clicked()
-{
-    QString xmlFilePath = QFileDialog::getOpenFileName(this, tr("Загрузить файл"), "",
-                                                       tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)"));
-    long bufferCount = qx::dao::count<PersonModel>();
-
-    if(!xmlFilePath.isEmpty())
-    {
-        if(dbPushService->addFromXmlFile(xmlFilePath).isValid() || qx::dao::count<PersonModel>() - bufferCount == 0)
-            ErrorMessage("Файл пустой или имеет некорректный формат.");
-        else
-        {
-            tableService->AddFromDataBase();
-            InfoMessage("Файл успешно обработан. Получено записей: " + QString::number(qx::dao::count<PersonModel>() - bufferCount) +
-                        "\nТекущее кол-во записей: " + QString::number(qx::dao::count<PersonModel>()));
-        }
-    }
-}
-
-void IndexView::on_DownloadXmlButton_clicked()
-{
-    QString xmlSavePath = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "",
-                                                       tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)"));
-
-    xmlParser->parseTable(*tableService->GetAllPersons(), xmlSavePath);
-}
-#define END_XML_BUTTONS }
-
-
-void IndexView::on_PersonTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
-{
-    currentViewRow = currentRow;
     PersonModel person = tableService->GetPersonFromTable(currentRow);
 
     ui->FirstNameView->setText(person.FirstName);
@@ -130,11 +99,9 @@ void IndexView::on_PersonTable_currentCellChanged(int currentRow, int currentCol
     ui->DescriptionView->setText(person.Description);
 }
 
-
 void IndexView::on_EditPerson_clicked()
 {
-    if(currentViewRow == -1)
-        ErrorMessage("Необходимо выбрать элемент");
+    if(currentViewRow == -1) ErrorMessage("Необходимо выбрать элемент");
     else
     {
         PersonModel model = tableService->GetPersonFromTable(currentViewRow);
@@ -144,3 +111,49 @@ void IndexView::on_EditPerson_clicked()
 
 }
 
+void IndexView::on_DeletePerson_clicked()
+{
+    if(currentViewRow == -1) ErrorMessage("Необходимо выбрать элемент");
+    else dbPushService->deletePerson(tableService, currentViewRow);
+}
+#define END_TOOL_BUTTONS }
+
+#define XML_BUTTONS {
+void IndexView::on_UploadXmlButton_clicked()
+{
+    QString xmlFilePath = QFileDialog::getOpenFileName(this, tr("Загрузить файл"), "",
+                                                       tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)"));
+
+    if(!xmlFilePath.isEmpty())
+    {
+        if(dbPushService->updateFromXmlFile(xmlFilePath, tableService).isValid() || qx::dao::count<PersonModel>() == 0)
+            ErrorMessage("Файл пустой или имеет некорректный формат.");
+        else
+            InfoMessage("Файл успешно обработан. Получено записей: " + QString::number(qx::dao::count<PersonModel>()) +
+                        "\nТекущее кол-во записей: " + QString::number(qx::dao::count<PersonModel>()));
+    }
+}
+
+void IndexView::on_AddXmlButton_clicked()
+{
+    QString xmlFilePath = QFileDialog::getOpenFileName(this, tr("Загрузить файл"), "",
+                                                       tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)"));
+    int bufferCount = qx::dao::count<PersonModel>();
+
+    if(!xmlFilePath.isEmpty())
+    {
+        if(dbPushService->addFromXmlFile(xmlFilePath, tableService).isValid() || qx::dao::count<PersonModel>() - bufferCount == 0)
+            ErrorMessage("Файл пустой или имеет некорректный формат.");
+        else InfoMessage("Файл успешно обработан. Получено записей: " + QString::number(qx::dao::count<PersonModel>() - bufferCount) +
+                         "\nТекущее кол-во записей: " + QString::number(qx::dao::count<PersonModel>()));
+    }
+}
+
+void IndexView::on_DownloadXmlButton_clicked()
+{
+    QString xmlSavePath = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "",
+                                                       tr("XML (*.xml);;JSON (*.json);;TXT (*.txt)"));
+
+    xmlParser->parseTable(*tableService->GetAllPersons(), xmlSavePath);
+}
+#define END_XML_BUTTONS }

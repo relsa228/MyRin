@@ -9,7 +9,6 @@ RedactPersonView::RedactPersonView(int row, PersonModel personModel, TableServic
 
     workingRow = row;
     model = personModel;
-    getService = new DataBaseGetService();
     workTableService = tableService;
 
     ui->nameEdit->setText(personModel.FirstName);
@@ -44,9 +43,7 @@ void RedactPersonView::on_acceptButton_clicked()
     model.Email = ui->emailEdit->text();
     model.Description = ui->descrEdit->toPlainText();
 
-    model.id = getService->getIdByRow(workingRow);
-    pushService->updatePersonInfo(model);
-    workTableService->UpdatePerson(workingRow, model);
+    pushService->updatePersonInfo(model, workTableService, workingRow);
 
     this->close();
 }

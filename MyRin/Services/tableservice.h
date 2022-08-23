@@ -14,6 +14,7 @@ class TableService
 private:
     QTableWidget *table;
     DataBaseGetService *dataBaseGet;
+    QVector<int> *IndexColumn;
 
 public:
     TableService(QTableWidget *newTable);
@@ -21,11 +22,11 @@ public:
     void AddPersonToTable(PersonModel person, int row);
     void AddVectorOfPersonsToTable(QVector<PersonModel>* vector);
 
-    void AddFromDataBase();
     void UpdateFromDataBase();
 
     PersonModel GetPersonFromTable(int row);
     QVector<PersonModel>* GetAllPersons();
+    int GetIdByRow(int row);
 
     void UpdatePerson(int row, PersonModel personModel);
 

@@ -5,7 +5,6 @@
 
 #include "Models/personmodel.h"
 
-#include "Services/DataBaseService/databasegetservice.h"
 #include "Services/DataBaseService/databasepushservice.h"
 #include "Services/tableservice.h"
 #include "Services/MessagesService/errormessage.h"
@@ -31,7 +30,6 @@ private slots:
 private:
     Ui::RedactPersonView *ui;
     PersonModel model;
-    DataBaseGetService *getService;
     DataBasePushService *pushService;
     TableService *workTableService;
     int workingRow;
