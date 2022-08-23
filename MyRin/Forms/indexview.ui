@@ -40,7 +40,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="redaction">
      <property name="geometry">
@@ -238,7 +238,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>160</y>
+        <y>320</y>
         <width>231</width>
         <height>24</height>
        </rect>
@@ -248,7 +248,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>210</y>
+        <y>150</y>
         <width>231</width>
         <height>24</height>
        </rect>
@@ -258,13 +258,13 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>260</y>
+        <y>370</y>
         <width>231</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
-       <string>@</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="FirstNameLabel">
@@ -310,7 +310,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>140</y>
+        <y>300</y>
         <width>49</width>
         <height>16</height>
        </rect>
@@ -323,7 +323,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>190</y>
+        <y>130</y>
         <width>71</width>
         <height>16</height>
        </rect>
@@ -336,7 +336,7 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>240</y>
+        <y>350</y>
         <width>101</width>
         <height>16</height>
        </rect>
@@ -375,9 +375,9 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>340</y>
+        <y>420</y>
         <width>231</width>
-        <height>131</height>
+        <height>51</height>
        </rect>
       </property>
      </widget>
@@ -385,13 +385,85 @@ XML</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>320</y>
+        <y>400</y>
         <width>191</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
        <string>Дополнительные сведения</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CityTelephoneInput">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>250</y>
+        <width>231</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="InternalTelephoneInput">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>200</y>
+        <width>231</width>
+        <height>24</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="InternalTelephoneLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>180</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Внутренний телефон</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="CityTelephoneLable">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>230</y>
+        <width>171</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Городской телефон</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>231</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_6">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>280</y>
+        <width>231</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>

@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QVector>
+#include <QStringList>
 
 #include "Forms/addpersonview.h"
 #include "Forms/redactpersonview.h"
@@ -18,6 +19,7 @@
 #include "Services/tableservice.h"
 #include "Services/DataBaseService/databaseinitservice.h"
 #include "Services/DataBaseService/databasepushservice.h"
+#include "Services/DataBaseService/databasegetservice.h"
 
 namespace Ui {
 class IndexView;
@@ -58,6 +60,7 @@ private:
     TableService* tableService;
     DataBaseInitService* dbInitService;
     DataBasePushService* dbPushService;
+    DataBaseGetService* dbGetService;
 
     int currentViewRow;
 };

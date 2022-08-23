@@ -3,6 +3,7 @@
 
 #include <QxOrm.h>
 #include <QVector>
+#include <QStringList>
 
 #include "Models/personmodel.h"
 
@@ -12,6 +13,7 @@ public:
     DataBaseGetService();
 
     QVector<PersonModel>* getAll();
+    QVector<PersonModel>* getByFilters(QStringList listOfFilters);
 };
 
 #endif // DATABASEGETSERVICE_H

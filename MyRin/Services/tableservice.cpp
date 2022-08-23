@@ -76,6 +76,20 @@ void TableService::UpdateFromDataBase()
     AddVectorOfPersonsToTable(dataBaseGet->getAll());
 }
 
+void TableService::UpdateFromVector(QVector<PersonModel> *persons)
+{
+    cleanTable();
+    IndexColumn->clear();
+    AddVectorOfPersonsToTable(persons);
+}
+
+void TableService::UpadateTableByFilter(QStringList listOfFilters)
+{
+    cleanTable();
+    IndexColumn->clear();
+    AddVectorOfPersonsToTable(dataBaseGet->getByFilters(listOfFilters));
+}
+
 PersonModel TableService::GetPersonFromTable(int row)
 {
     PersonModel tempPerson;

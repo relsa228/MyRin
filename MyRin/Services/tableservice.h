@@ -3,6 +3,7 @@
 
 #include <QTableWidget>
 #include <QVector>
+#include <QStringList>
 #include <QxOrm.h>
 
 #include "Models/personmodel.h"
@@ -23,6 +24,8 @@ public:
     void AddVectorOfPersonsToTable(QVector<PersonModel>* vector);
 
     void UpdateFromDataBase();
+    void UpdateFromVector(QVector<PersonModel>* persons);
+    void UpadateTableByFilter(QStringList listOfFilters);
 
     PersonModel GetPersonFromTable(int row);
     QVector<PersonModel>* GetAllPersons();

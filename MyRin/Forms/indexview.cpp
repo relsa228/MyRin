@@ -12,6 +12,7 @@ IndexView::IndexView(QWidget *parent) :
     tableService = new TableService(ui->PersonTable);
     dbInitService = new DataBaseInitService();
     dbPushService = new DataBasePushService();
+    dbGetService = new DataBaseGetService();
 
     ui->PersonTable->setColumnCount(9);
     for (int i = 0; i < 9; i++)
@@ -31,12 +32,22 @@ IndexView::~IndexView()
 #define TOOL_BUTTONS {
 void IndexView::on_FindButton_clicked()
 {
-    QString firstNameFilter = ui->FirstNameInput->text();
-    QString surnameFilter = ui->SurnameInput->text();
-    QString patronymicFilter = ui->PatronymicInput->text();
-    QString emailFilter = ui->EmailInput->text();
-    QString telephoneFilter = ui->TelephoneInput->text();
-    QString TelegramFilter = ui->TelegramInput->text();
+    QStringList listOfFilters = QStringList();
+    listOfFilters << ui->FirstNameInput->text();
+    listOfFilters << ui->SurnameInput->text();
+    listOfFilters << ui->PatronymicInput->text();
+
+    listOfFilters << ui->TelephoneInput->text();
+    listOfFilters << ui->InternalTelephoneInput->text();
+    listOfFilters << ui->CityTelephoneInput->text();
+
+    listOfFilters << ui->EmailInput->text();
+    listOfFilters << ui->TelegramInput->text();
+    listOfFilters << ui->DescriptionInput->toPlainText();
+
+    tableService->UpadateTableByFilter(listOfFilters);
+
+    //dbGetService->getByFilters();
 }
 
 void IndexView::on_CleanButton_clicked()
@@ -48,7 +59,7 @@ void IndexView::on_CleanButton_clicked()
     ui->PatronymicInput->setText("");
     ui->EmailInput->setText("");
     ui->TelephoneInput->setText("");
-    ui->TelegramInput->setText("@");
+    ui->TelegramInput->setText("");
 }
 
 void IndexView::on_CleanTable_clicked()
