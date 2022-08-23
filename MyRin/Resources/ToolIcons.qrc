@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/new/mainTools">
+        <file>Icons/Tools/arrow-bar-down.svg</file>
+        <file>Icons/Tools/arrow-bar-up.svg</file>
+        <file>Icons/Tools/plus-lg.svg</file>
+    </qresource>
+    <qresource prefix="/new/personTools">
+        <file>Icons/PersonTools/pencil-fill.svg</file>
+        <file>Icons/PersonTools/person-plus-fill.svg</file>
+        <file>Icons/PersonTools/person-x-fill.svg</file>
+        <file>Icons/PersonTools/printer-fill.svg</file>
+        <file>Icons/PersonTools/trash-fill.svg</file>
+    </qresource>
+</RCC>

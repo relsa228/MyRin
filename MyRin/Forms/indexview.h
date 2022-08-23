@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QVector>
 #include <QStringList>
+#include <QResizeEvent>
 
 #include "Forms/addpersonview.h"
 #include "Forms/redactpersonview.h"
@@ -53,6 +54,8 @@ private slots:
     void on_EditPerson_clicked();
 
     void on_DeletePerson_clicked();
+
+    virtual void resizeEvent(QResizeEvent *);
 
 private:
     Ui::IndexView *ui;

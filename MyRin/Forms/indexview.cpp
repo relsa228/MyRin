@@ -29,6 +29,15 @@ IndexView::~IndexView()
     delete ui;
 }
 
+
+void IndexView::resizeEvent(QResizeEvent *)
+{
+    float newSize = ui->PersonTable->size().width()/9;
+    if(ui->PersonTable->size().width() >= 1067)
+        for (int i = 0; i < 9; i++)
+            ui->PersonTable->setColumnWidth(i, newSize - 6.5);
+}
+
 #define TOOL_BUTTONS {
 void IndexView::on_FindButton_clicked()
 {
@@ -46,8 +55,6 @@ void IndexView::on_FindButton_clicked()
     listOfFilters << ui->DescriptionInput->toPlainText();
 
     tableService->UpadateTableByFilter(listOfFilters);
-
-    //dbGetService->getByFilters();
 }
 
 void IndexView::on_CleanButton_clicked()
