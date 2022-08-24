@@ -7,6 +7,9 @@
 #include <QVector>
 #include <QStringList>
 #include <QResizeEvent>
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QPainter>
 
 #include "Forms/addpersonview.h"
 #include "Forms/redactpersonview.h"
@@ -58,6 +61,8 @@ private slots:
     void on_DeletePerson_clicked();
 
     virtual void resizeEvent(QResizeEvent *);
+
+    void on_pushButton_clicked();
 
 private:
     Ui::IndexView *ui;

@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += xml
+QT       += printsupport
 
 #*****************************************************
 include(..\MyRin\QxOrm\QxOrm.pri)

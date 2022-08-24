@@ -18,11 +18,12 @@ IndexView::IndexView(QWidget *parent) :
 
     ui->PersonTable->setColumnCount(9);
     for (int i = 0; i < 9; i++)
-        ui->PersonTable->setColumnWidth(i, 105);
-    ui->PersonTable->setColumnWidth(8, 165);
+        ui->PersonTable->setColumnWidth(i, 90);
+    ui->PersonTable->setColumnWidth(8, 97);
+
     ui->PersonTable->setHorizontalHeaderLabels(QStringList()<< "Имя" << "Фамилия" << "Отчество" << "Почта"
                                                << "Телефон" << "Внтр. телефон" << "Гор. телефон" << "Telegram"
-                                               << "Дополнительные сведения");
+                                               << "Дополнительные\nсведения");
     tableService->UpdateFromDataBase();
 
     configWorker->configRead();
@@ -38,10 +39,12 @@ IndexView::~IndexView()
 void IndexView::resizeEvent(QResizeEvent *)
 {
     float newSize = ui->PersonTable->size().width()/9;
-    if(ui->PersonTable->size().width() >= 1067)
+    if (newSize > 11)
+    {
         for (int i = 0; i < 9; i++)
             ui->PersonTable->setColumnWidth(i, newSize - 6.5);
-    ui->PersonTable->setColumnWidth(8, newSize + 45); //проверить на стационаре
+        ui->PersonTable->setColumnWidth(8, newSize + 45); //проверить на стационаре
+    }
 }
 
 #define TOOL_BUTTONS {
@@ -186,3 +189,16 @@ void IndexView::on_DownloadXmlButton_clicked()
     xmlParser->parseTable(*tableService->GetAllPersons(), xmlSavePath);
 }
 #define END_XML_BUTTONS }
+
+void IndexView::on_pushButton_clicked()
+{
+    QPrinter printer;
+    QPrintDialog dialog(&printer, this);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        QPainter painter(&printer);
+        ui->PersonTable->render(&painter);
+    }
+
+}
+
