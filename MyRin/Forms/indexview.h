@@ -10,8 +10,10 @@
 
 #include "Forms/addpersonview.h"
 #include "Forms/redactpersonview.h"
+#include "Forms/MiniForms/deletedialog.h"
 
 #include "Parsers/xmlparser.h"
+#include "Parsers/configworker.h"
 
 #include "Models/personmodel.h"
 
@@ -59,7 +61,10 @@ private slots:
 
 private:
     Ui::IndexView *ui;
+
     XmlParser* xmlParser;
+    ConfigWorker* configWorker;
+
     TableService* tableService;
     DataBaseInitService* dbInitService;
     DataBasePushService* dbPushService;

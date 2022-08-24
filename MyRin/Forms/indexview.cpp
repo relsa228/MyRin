@@ -7,6 +7,8 @@ IndexView::IndexView(QWidget *parent) :
 {
     currentViewRow = -1;
     ui->setupUi(this);
+
+    configWorker = new ConfigWorker();
     xmlParser = new XmlParser();
 
     tableService = new TableService(ui->PersonTable);
@@ -22,10 +24,13 @@ IndexView::IndexView(QWidget *parent) :
                                                << "Телефон" << "Внтр. телефон" << "Гор. телефон" << "Telegram"
                                                << "Дополнительные сведения");
     tableService->UpdateFromDataBase();
+
+    configWorker->configRead();
 }
 
 IndexView::~IndexView()
 {
+    configWorker->configSave();
     delete ui;
 }
 
@@ -36,6 +41,7 @@ void IndexView::resizeEvent(QResizeEvent *)
     if(ui->PersonTable->size().width() >= 1067)
         for (int i = 0; i < 9; i++)
             ui->PersonTable->setColumnWidth(i, newSize - 6.5);
+    ui->PersonTable->setColumnWidth(8, newSize + 45); //проверить на стационаре
 }
 
 #define TOOL_BUTTONS {
@@ -132,6 +138,11 @@ void IndexView::on_EditPerson_clicked()
 void IndexView::on_DeletePerson_clicked()
 {
     if(currentViewRow == -1) ErrorMessage("Необходимо выбрать элемент");
+    else if(configWorker->config["DeletePersoneAprove"] == 1)
+    {
+        DeleteDialog* deleteDialog = new DeleteDialog(dbPushService, tableService, configWorker, currentViewRow);
+        deleteDialog->show();
+    }
     else dbPushService->deletePerson(tableService, currentViewRow);
 }
 #define END_TOOL_BUTTONS }

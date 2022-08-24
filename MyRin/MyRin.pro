@@ -33,10 +33,12 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Forms/MiniForms/deletedialog.cpp \
     Forms/addpersonview.cpp \
     Forms/indexview.cpp \
     Forms/redactpersonview.cpp \
     Models/personmodel.cpp \
+    Parsers/configworker.cpp \
     Parsers/jsonparser.cpp \
     Parsers/xmlparser.cpp \
     Services/DataBaseService/databasegetservice.cpp \
@@ -48,10 +50,12 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Forms/MiniForms/deletedialog.h \
     Forms/addpersonview.h \
     Forms/indexview.h \
     Forms/redactpersonview.h \
     Models/personmodel.h \
+    Parsers/configworker.h \
     Parsers/jsonparser.h \
     Parsers/xmlparser.h \
     Services/DataBaseService/databasegetservice.h \
@@ -64,6 +68,7 @@ HEADERS += \
     precompiled.h
 
 FORMS += \
+    Forms/MiniForms/deletedialog.ui \
     Forms/addpersonview.ui \
     Forms/indexview.ui \
     Forms/redactpersonview.ui
