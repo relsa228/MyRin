@@ -6,18 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>411</width>
-    <height>144</height>
+    <width>381</width>
+    <height>142</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Удаление</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../Resources/MainIcons.qrc">
+    <normaloff>:/icons/mainIcon/Icons/MainIcons/table.svg</normaloff>:/icons/mainIcon/Icons/MainIcons/table.svg</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="DeleteMessage">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>Вы действительно желаете удалить контакт?
+      <string>Вы действительно хотите удалить данный контакт?
 Это действие невозможно отменить.</string>
      </property>
     </widget>
@@ -41,7 +50,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../Resources/MainIcons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

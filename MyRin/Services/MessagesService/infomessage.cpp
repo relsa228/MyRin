@@ -3,7 +3,7 @@
 InfoMessage::InfoMessage(QString message)
 {
     QMessageBox msg = QMessageBox();
-    msg.setWindowIcon(QIcon(":/icon/mainIcon/Icons/calendar3.svg"));
+    msg.setWindowIcon(QIcon(":/icons/mainIcon/Icons/MainIcons/table.svg"));
     msg.setWindowTitle("Выполнено");
     msg.setIcon(msg.Information);
     msg.setText(message);

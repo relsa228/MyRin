@@ -1,14 +1,18 @@
 <RCC>
-    <qresource prefix="/new/mainTools">
-        <file>Icons/Tools/arrow-bar-down.svg</file>
-        <file>Icons/Tools/arrow-bar-up.svg</file>
-        <file>Icons/Tools/plus-lg.svg</file>
-    </qresource>
-    <qresource prefix="/new/personTools">
+    <qresource prefix="/tools/person">
         <file>Icons/PersonTools/pencil-fill.svg</file>
         <file>Icons/PersonTools/person-plus-fill.svg</file>
         <file>Icons/PersonTools/person-x-fill.svg</file>
-        <file>Icons/PersonTools/printer-fill.svg</file>
-        <file>Icons/PersonTools/trash-fill.svg</file>
+    </qresource>
+    <qresource prefix="/tools/database">
+        <file>Icons/DatabasetTools/printer-fill.svg</file>
+        <file>Icons/DatabasetTools/sd-card.svg</file>
+        <file>Icons/DatabasetTools/sd-card-fill.svg</file>
+        <file>Icons/DatabasetTools/trash-fill.svg</file>
+    </qresource>
+    <qresource prefix="/tools/parsers">
+        <file>Icons/ParsersTools/arrow-bar-down.svg</file>
+        <file>Icons/ParsersTools/arrow-bar-up.svg</file>
+        <file>Icons/ParsersTools/plus-lg.svg</file>
     </qresource>
 </RCC>
