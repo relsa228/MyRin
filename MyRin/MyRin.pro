@@ -2,13 +2,20 @@ QT       += core gui
 QT       += xml
 QT       += printsupport
 
+VERSION = 1.0.0
+QMAKE_TARGET_COMPANY = relTech
+QMAKE_TARGET_PRODUCT = myRin
+QMAKE_TARGET_ORIGINAL_FILENAME = myRin.exe
+QMAKE_TARGET_COPYRIGHT = Copyright (C) 2022, relTech
+RC_ICONS += $$PWD/Resources/Icons/MainIcons/table.ico
+
 #*****************************************************
 include(..\MyRin\QxOrm\QxOrm.pri)
 
 TEMPLATE = app
 DEFINES += _BUILDING_MYRIN
-INCLUDEPATH += ..\MyRin\QxOrm\include\
-LIBS += ..\MyRin\QxOrm\lib
+INCLUDEPATH += $$PWD\QxOrm\include\
+LIBS += $$PWD\QxOrm\lib
 
 !contains(DEFINES, _QX_NO_PRECOMPILED_HEADER) {
 PRECOMPILED_HEADER = ./precompiled.h
@@ -21,7 +28,7 @@ TARGET = MyRind
 LIBS += -L$$PWD/QXOrm/lib/ -lQxOrmd
 } else {
 TARGET = MyRin
-LIBS += -L$$PWD/QXOrm/lib/ -lQxOrm
+LIBS += -L$$PWD/QXOrm/lib/ -lQxOrmd
 }
 #*****************************************************
 

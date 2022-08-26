@@ -2,5 +2,6 @@
     <qresource prefix="/icons/mainIcon">
         <file>Icons/MainIcons/calendar3.svg</file>
         <file>Icons/MainIcons/table.svg</file>
+        <file>Icons/MainIcons/table.ico</file>
     </qresource>
 </RCC>
